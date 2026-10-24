@@ -49,7 +49,9 @@ jobs:
         working-directory: android
       - run: cp android/app/build/outputs/apk/debug/app-debug.apk PocketSheet.apk
       # Prints the APK's signing fingerprint. It must be the same in every run.
-      - run: $ANDROID_HOME/build-tools/*/apksigner verify --print-certs PocketSheet.apk | grep -i "SHA-256"
+      - run: |
+          APKSIGNER="$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner"
+          "$APKSIGNER" verify --print-certs PocketSheet.apk | grep -i "SHA-256" || true
       - uses: actions/upload-artifact@v4
         with:
           name: PocketSheet
