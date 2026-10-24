@@ -445,6 +445,33 @@ body{line-height:1.5}
 .sumrow div{min-width:0;overflow-wrap:anywhere}.sumrow p{margin:0 0 4px;font-size:14px;line-height:1.35}.sumrow p small{display:block;color:var(--ink2);font-size:12.5px}
 .sumrow .up{font-weight:700;color:var(--accent)}.sumrow .no{color:var(--ink2)}
 .arow{grid-template-columns:28px minmax(0,1fr) auto;gap:0;padding:0 6px 0 0}.arow .nm{font-size:clamp(11px,3.3vw,14px);line-height:1.15;letter-spacing:0;overflow-wrap:break-word}.arow .bn{min-width:32px;padding:0 2px;font-size:15px}
+.rcard{min-width:0;overflow:hidden}.rcard .rt{font-size:clamp(12.5px,3.7vw,15px);overflow-wrap:break-word;hyphens:auto;max-width:100%}.rcard .rt.sm{font-size:clamp(11px,3.1vw,13px)}
+.rval{font:500 clamp(13px,3.9vw,18px)/1.25 var(--body);max-width:100%;overflow-wrap:break-word;text-align:center}
+#tabs button,.tabs button{font-size:clamp(12.5px,3.9vw,16px);letter-spacing:0;padding:0 2px;overflow:hidden}
+button,[data-lp],[data-lp] *,.rcard,.rcard *,.who2,.who2 *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;-webkit-tap-highlight-color:transparent}
+input,textarea,select{-webkit-user-select:text;user-select:text}
+.subh{font:400 13px var(--display);font-variant:small-caps;letter-spacing:.08em;color:var(--ink2);margin:16px 0 8px;padding-top:10px;border-top:1px dashed var(--line,#4a4540)}.subh:first-child{margin-top:0;padding-top:0;border-top:0}
+.item .stepper{flex:none;gap:4px}.item .stepper .bn{min-width:36px;min-height:36px}.item .stepper b{min-width:2ch}
+
+.otl{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr) minmax(0,1fr);gap:8px;margin-top:4px}
+.osm{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.otile{display:grid;align-content:center;justify-items:center;gap:3px;min-width:0;padding:10px 6px;border:2px solid var(--gold);border-radius:3px;background:var(--plate);text-align:center;overflow:hidden}
+.otile small{font:600 10.5px/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.otile b{font:500 17px/1.1 var(--mono);overflow-wrap:anywhere}.otile b.big{font:500 30px/1 var(--mono)}
+.otile>span,.otile em{font:400 11px/1.2 var(--body);color:var(--ink2);font-style:normal}
+.otile.ac{border-radius:6px 6px 46% 46%/6px 6px 30% 30%;padding-bottom:16px}
+.otile.hpt{justify-items:stretch}.hpr{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:end}.hpr>div{display:grid;gap:2px;justify-items:center}.hpr .hps{border-left:1px solid var(--rule)}.hpr .hps i{font:italic 400 11px var(--body);color:var(--ink2);min-height:12px}.hpr span{font:400 11px var(--body);color:var(--ink2)}
+.osm .otile{padding:8px 4px}.osm .otile b{font-size:15px}
+.stat3.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:8px}
+.gh{display:flex;align-items:center;justify-content:space-between;gap:10px;border:2px solid var(--gold);background:var(--plate);border-radius:3px;padding:2px 10px}
+.gtog{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;flex:1;min-height:44px;font:800 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.gtog[aria-expanded=true] .chev{transform:rotate(45deg) translate(-2px,-2px)}
+.ghp{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.group .list{margin-top:8px}.group{margin-top:12px}
+.ptl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.otile.pt{justify-items:start;text-align:left;align-content:start;min-height:72px}.otile.pt b{font:400 15px/1.3 var(--body);overflow-wrap:break-word}
+#L-feats>.item,#L-items>.item{padding:12px;border:2px solid var(--rule);border-radius:3px;background:var(--plate);margin-bottom:10px}
+#L-feats .who2 .tag{margin:4px 0 2px;justify-self:start;display:inline-block}
+.item{min-width:0}#L-items .line{flex-wrap:wrap!important}#L-items .who2{min-width:0;flex:1 1 120px}.otile.hdt b.big{font-size:24px;letter-spacing:-.02em}
+.sec h2 .btns{flex-wrap:nowrap;align-items:center;gap:10px}.sec h2 .btns .note{white-space:nowrap}
 </style>
 
 <div id="app"></div>
@@ -566,15 +593,15 @@ function show(label,total,detail){var t=$('#toast');if(!t){t=document.createElem
 /* ---------- field helpers ---------- */
 function fld(p,l,o){o=o||{};var t=o.t||'text',v=getp(S,p);
   return '<label class="fld '+(o.c||'')+'"><span>'+l+'</span><input data-p="'+p+'" data-t="'+t+'" '+(t==='num'?'type="number" inputmode="numeric"':'type="text"')+' value="'+esc(v==null?'':v)+'"'+(o.ph?' placeholder="'+esc(o.ph)+'"':'')+'></label>'}
-function area(p,l,rows){return '<label class="fld wide"><span>'+l+'</span><textarea data-p="'+p+'" data-t="text" rows="'+(rows||3)+'">'+esc(getp(S,p)==null?'':getp(S,p))+'</textarea></label>'}
+function area(p,l,rows,ro){return '<label class="fld wide"><span>'+l+'</span><textarea data-p="'+p+'" data-t="text" rows="'+(rows||3)+'"'+(ro?' readonly data-hold="1"':'')+'>'+esc(getp(S,p)==null?'':getp(S,p))+'</textarea></label>'}
 function sel(p,l,opts,o){o=o||{};var cur=String(getp(S,p));
   return '<label class="fld '+(o.c||'')+'"><span>'+l+'</span><select data-p="'+p+'" data-t="'+(o.t||'text')+'"'+(o.r?' data-r="1"':'')+'>'+opts.map(function(x){return '<option value="'+esc(x[0])+'"'+(String(x[0])===cur?' selected':'')+'>'+esc(x[1])+'</option>'}).join('')+'</select></label>'}
 function dot(p,on,label){return '<button class="dot '+(on?'d1':'')+'" data-act="tog" data-p="'+p+'" aria-pressed="'+(!!on)+'" aria-label="'+esc(label)+'"></button>'}
-var OPEN={},SHUT={'Death saves':1,'Exhaustion':1,'Conditions':1,'Personality':1,'Notes':1,'Proficiencies and languages':1,'Identity':1,'Caster setup':1,'Load':1,'Attack modifiers':1,'Defense':1};
+var OPEN={},SHUT={'Status':1,'Personality':1,'Notes':1,'Proficiencies and languages':1,'Identity':1,'Caster setup':1,'Load':1,'Attack modifiers':1,'Defense':1};
 function isOpen(k){return !!OPEN[S.id+k]}
 function delBar(id,list,i){return isOpen('x'+id)?'<div class="line delbar"><span class="note grow">Delete this?</span><button class="btn dng" data-act="del" data-l="'+list+'" data-i="'+i+'" data-confirm>Delete</button><button class="btn" data-act="lpx" data-id="'+id+'">Keep</button></div>':''}
 function secOpen(t){var u=DB.ui||{};if(u[t]!==undefined)return !!u[t];
-  if(t==='Death saves')return N(S.hp.cur)<=0;if(t==='Caster setup')return S.sp.type==='none';return !SHUT[t]}
+  if(t==='Status')return N(S.hp.cur)<=0;if(t==='Caster setup')return S.sp.type==='none';return !SHUT[t]}
 function sec(t,extra,body){var o=secOpen(t);return '<section class="sec'+(o?'':' shut')+'"><h2><button class="sech" data-act="secto" data-id="'+esc(t)+'" aria-expanded="'+o+'"><i class="chev"></i>'+t+'</button>'+(extra||'')+'</h2>'+(o?body:'')+'</section>'}
 
 /* ---------- views ---------- */
@@ -697,7 +724,7 @@ function syncRes(c){
   var old={},cust=[];(c.res||[]).forEach(function(r){if(r.k&&!r.custom)old[r.k]=r;else{
     if(!r.t){if(r.v!==undefined){r.t='ref';r.text=r.v;delete r.v}else r.t=N(r.max)<=1?'counter':'counter'}
     if(!r.rec)r.rec={s:r.rest==='short'?1:0,l:r.rest==='none'?0:1};r.custom=1;cust.push(r)}});
-  var seen={},out=[];resDefs(c).forEach(function(df){if(seen[df.k])return;seen[df.k]=1;var o=old[df.k]||{};
+  var seen={},out=[];resDefs(c).forEach(function(df){if(seen[df.k])return;seen[df.k]=1;if(c.rhide&&c.rhide[df.k])return;var o=old[df.k]||{};
     var r={k:df.k,n:df.n,auto:1};if(df.ref){r.t='ref';r.text=df.ref}else if(df.v!==undefined){r.t='ref';r.text=df.v}else{r.t='counter';r.max=df.max;r.sr=df.sr||0;r.rec={s:df.rest==='short'?1:0,l:1};r.used=Math.max(0,Math.min(df.max,N(o.used)))}out.push(r)});
   c.res=out.concat(cust)}
 function recLabel(r){var rc=r.rec||{};return rc.s&&rc.l?'Short or Long Rest':rc.s?'Short Rest':rc.l?'Long Rest':'Manual'}
@@ -709,11 +736,12 @@ function resCard(r,i){
   else if(N(r.max)>6)body='<div class="rcnt"><button class="bn" data-act="rstep" data-i="'+i+'" data-d="-1" aria-label="Use one">−</button><b>'+av+'/'+N(r.max)+'</b><button class="bn" data-act="rstep" data-i="'+i+'" data-d="1" aria-label="Regain one">+</button></div>';
   else{var pips='';for(var j=0;j<N(r.max);j++)pips+='<button class="rpip'+(j<av?' on':'')+'" data-act="rpip" data-i="'+i+'" data-j="'+j+'" aria-pressed="'+(j<av)+'" aria-label="'+esc(r.n)+' use '+(j+1)+'">'+(j<av?'&times;':'')+'</button>';body='<div class="rpips">'+pips+'</div>'}
   if(t==='counter'||t==='toggle')foot='<small>'+recLabel(r)+'</small>';
-  var head=r.custom?'<button class="rt" data-act="edres" data-i="'+i+'" data-lp="rs'+i+'">'+esc(r.n||'Resource')+'</button>':'<span class="rt">'+esc(r.n)+'</span>';
-  return '<div class="rcard">'+head+body+foot+'</div>'+(r.custom?delBar('rs'+i,'res',i):'')}
+  var sm=String(r.n||'').split(/\s+/).some(function(w){return w.length>=10})?' sm':'';
+  var head='<button class="rt'+sm+'" data-act="edres" data-i="'+i+'" data-lp="rs'+i+'">'+esc(r.n||'Resource')+'</button>';
+  return '<div class="rcard">'+head+body+foot+'</div>'+delBar('rs'+i,'res',i)}
 function resourcesHTML(){
   syncRes(S);var cards=S.res.map(function(r,i){var c=resCard(r,i);var m=c.indexOf('<div class="line delbar">');return m<0?[c,'']:[c.slice(0,m),c.slice(m)]});
-  return sec('Resources','<button class="lnk" data-act="resnew">+ New</button>',cards.length?'<div class="rgrid">'+cards.map(function(c){return c[0]}).join('')+'</div>'+cards.map(function(c){return c[1]}).join('')+'<p class="hint" style="margin-top:8px">Tap a circle to use it. Short and Long rest refill them. Tap a custom card to edit it, hold it to delete.</p>':'<p class="empty">No class resources yet. Tap + New to add your own.</p>')}
+  return sec('Resources','<button class="lnk" data-act="resnew">+ New</button>',cards.length?'<div class="rgrid">'+cards.map(function(c){return c[0]}).join('')+'</div>'+cards.map(function(c){return c[1]}).join('')+'<p class="hint" style="margin-top:8px">Tap a circle to use it. Short and Long rest refill them. Tap a card name to edit it, hold it to delete.'+(Object.keys(S.rhide||{}).length?' <button class="lnk" data-act="resrestore">Restore removed cards</button>':'')+'</p>':'<p class="empty">No class resources yet. Tap + New to add your own.</p>')}
 
 /* ---------- modifiers, actions, bonus actions, reactions ---------- */
 var AK_RIDER=/^\W*(?:starting at \d+\w* level,?\s*)?(?:whenever you activate|when you take a bonus action|if you have no uses|as part of the bonus action)/i;
@@ -762,6 +790,7 @@ function edSave(){
     if(d.t==='counter'){r.max=Math.max(1,Math.floor(N(d.max))||1);r.used=Math.max(0,r.max-Math.max(0,Math.min(r.max,Math.floor(N(d.cur)))))}
     if(d.t==='toggle'){r.max=1;r.used=N(d.used)?1:0}
     if(ED.i>=0&&L[ED.i].t==='toggle'&&d.t==='toggle')r.used=L[ED.i].used;
+    if(ED.i>=0&&L[ED.i].k&&!L[ED.i].custom){S.rhide=S.rhide||{};S.rhide[L[ED.i].k]=1}
     if(ED.i>=0)L[ED.i]=r;else L.push(r)}
   else if(k==='mod'){L=S.mods;var m={n:String(d.n).trim(),hit:Math.floor(N(d.hit)),dmg:String(d.dmg||'').replace(/^\+/,'').trim(),on:N(d.on)?1:0};if(ED.i>=0)L[ED.i]=m;else L.push(m)}
   else{L=S.acts;var a={n:String(d.n).trim(),kind:d.kind||'action',text:d.text||''};if(ED.i>=0)L[ED.i]=a;else L.push(a)}
@@ -774,8 +803,14 @@ function overviewHTML(){
     +'<div class="line" style="margin-top:8px"><label class="fld grow"><span>XP amount</span><input id="xpamt" type="number" inputmode="numeric" min="0" placeholder="0"></label><button class="btn pri" data-act="xp" data-a="add">Gain</button><button class="btn" data-act="xp" data-a="sub">Lose</button></div>'
     +'<div class="btns" style="margin-top:10px">'+(can?'<button class="btn pri" id="lvbtn" data-act="lvlup">Level up</button>':'')+'<button class="btn" data-act="rest" data-a="short">Short rest</button><button class="btn" data-act="rest" data-a="long">Long rest</button></div>'
     +'<p class="hint" style="margin-top:8px">Long rest: full HP, half your hit dice back, all spell slots back. Short rest: Pact slots back, then spend hit dice under Hit dice to heal.</p></div>')}
+function ovTiles(){
+  var auto=S.acm==='auto',many=Object.keys(S.hdp||{}).length;
+  return '<div class="otl"><div class="otile ac"><small>Armor class</small><b data-c="ac"></b><span>'+(auto?'from gear':'manual')+'</span></div>'
+    +'<div class="otile hpt"><small>Hit points</small><div class="hpr"><div><b class="big" data-c="hpcur"></b><span>current</span></div><div class="hps"><i data-c="hptmp"></i><b data-c="hpmaxt"></b><span>max</span></div></div></div>'
+    +'<div class="otile hdt"><small>Hit dice</small><b class="big" data-c="hdie"></b><span><em data-c="hdl"></em> / <em data-c="hdtot"></em> left</span></div></div>'
+    +'<div class="osm"><div class="otile"><small>Initiative</small><b data-c="init"></b></div><div class="otile"><small>Speed</small><b data-c="speedt"></b></div><div class="otile"><small>Size</small><b data-c="size"></b></div><div class="otile"><small>Senses</small><b data-c="pass"></b><span>passive perc.</span></div></div>'}
 function vCombat(){
-  var hp='<div class="hp"><div class="hpnum"><b data-c="hpcur"></b><span data-c="hpmaxt"></span><span class="tmp" data-c="hptmp"></span></div><div class="bar"><i id="hpfill"></i></div>'
+  var hp='<div class="hp"><div class="bar"><i id="hpfill"></i></div>'
     +'<div class="line"><label class="fld grow"><span>Amount</span><input id="hpamt" type="number" inputmode="numeric" min="0" placeholder="0"></label><button class="btn dng" data-act="hp" data-a="dmg">Damage</button><button class="btn pri" data-act="hp" data-a="heal">Heal</button><button class="btn" data-act="hp" data-a="temp">+Temp</button></div>'
     +'<details class="mini"><summary>Set current, max or temp HP directly</summary><div class="grid3">'+fld('hp.cur','Current',{t:'num'})+fld('hp.max','Max',{t:'num'})+fld('hp.temp','Temp',{t:'num'})+'</div></details></div>';
   var auto=S.acm==='auto';
@@ -795,16 +830,15 @@ function vCombat(){
     :'<p class="empty">No attacks yet. Add a weapon from Gear, Browse gear, or tap Add.</p>';
   var hidn=Object.keys(S.hid||{}).length?'<div class="btns" style="margin-top:10px"><button class="btn" data-act="achow">Show '+Object.keys(S.hid).length+' hidden</button></div>':'';
   var P={'Experience and rest':overviewHTML(),'Resources':resourcesHTML(),'Attack modifiers':modSec(),'Actions':actSec('Actions','action','actions'),'Bonus actions':actSec('Bonus actions','bonus','bonus actions'),'Reactions':actSec('Reactions','reaction','reactions')+hidn,
-    'Hit points':sec('Hit points','',hp),
+    'Overview':sec('Overview','',ovTiles()+hp+'<h4 class="subh">Hit dice</h4>'+hd+'<details class="mini" style="margin-top:12px"><summary>Edit AC, initiative bonus and speed</summary>'+core+'</details>'),
     'Attacks':sec('Attacks','<button class="btn pri" data-act="add" data-k="attacks">Add</button>','<p class="hint">Hit and Damage show your bonuses. Tap a name to edit, hold it to delete.</p><div class="list" id="L-attacks">'+atk+'</div>'),
-    'Defense':sec('Defense','',core),'Hit dice':sec('Hit dice','',hd),'Death saves':sec('Death saves','',ds('s','Successes')+ds('f','Failures')),
-    'Exhaustion':sec('Exhaustion','<span class="note">PHB 2014</span>',exh),'Conditions':sec('Conditions','',conds)};
+    'Status':sec('Status','','<h4 class="subh">Death saves</h4>'+ds('s','Successes')+ds('f','Failures')+'<h4 class="subh">Exhaustion <span class="note">PHB 2014</span></h4>'+exh+'<h4 class="subh">Conditions</h4>'+conds)};
   return layoutOrder().filter(function(n){return !layoutHidden(n)}).map(function(n){return P[n]||''}).join('')
     +'<div class="btns" style="margin-top:18px"><button class="btn" data-act="layopen">Customize this tab</button></div>'}
 
 /* ---------- layout customization (Basic tab) ---------- */
-var BASIC_DEF=['Experience and rest','Resources','Attack modifiers','Actions','Bonus actions','Reactions','Hit points','Attacks','Defense','Hit dice','Death saves','Exhaustion','Conditions'];
-function layoutOrder(){var l=(DB.layout&&DB.layout.basic)||{},o=(l.order||[]).filter(function(n){return BASIC_DEF.indexOf(n)>=0});BASIC_DEF.forEach(function(n){if(o.indexOf(n)<0)o.push(n)});return o}
+var BASIC_DEF=['Overview','Resources','Experience and rest','Attack modifiers','Actions','Bonus actions','Reactions','Attacks','Status'];
+function layoutOrder(){var l=(DB.layout&&DB.layout.basic)||{},o=(l.order||[]).filter(function(n){return BASIC_DEF.indexOf(n)>=0});BASIC_DEF.forEach(function(n){if(o.indexOf(n)<0)o.push(n)});o=o.filter(function(n){return n!=='Overview'});o.unshift('Overview');return o}
 function layoutHidden(n){var l=(DB.layout&&DB.layout.basic)||{};return !!(l.hide&&l.hide[n])}
 function layoutSave(o,h){DB.layout=DB.layout||{};DB.layout.basic={order:o,hide:h||((DB.layout.basic||{}).hide)||{}};touch()}
 function layHTML(){
@@ -814,6 +848,9 @@ function layHTML(){
     +o.map(function(n,i){var hid=layoutHidden(n);return '<div class="lay'+(hid?' off':'')+'" data-n="'+esc(n)+'"><button class="drag" aria-label="Drag to reorder '+esc(n)+'">&#9776;</button><button class="eye" data-act="layeye" data-n="'+esc(n)+'" aria-pressed="'+(!hid)+'" aria-label="'+(hid?'Show ':'Hide ')+esc(n)+'">'+(hid?'&#9675;':'&#9679;')+'</button><span class="grow">'+esc(n)+'</span><button class="bn" data-act="laymv" data-i="'+i+'" data-d="-1" '+(i===0?'disabled':'')+' aria-label="Move up">&uarr;</button><button class="bn" data-act="laymv" data-i="'+i+'" data-d="1" '+(i===o.length-1?'disabled':'')+' aria-label="Move down">&darr;</button></div>'}).join('')
     +'<div class="sh-f"><button class="btn" data-act="layreset">Reset to default</button><button class="btn pri" data-act="close">Done</button></div></div>'}
 
+function slotPips(lv){var max=slotMax(lv),used=Math.min(max,N(S.sp.used[lv-1])),av=max-used,p='';
+  for(var j=0;j<max;j++)p+='<button class="pip sq '+(j<av?'av':'')+'" data-act="pip" data-lv="'+lv+'" data-i="'+j+'" aria-pressed="'+(j<av)+'" aria-label="'+ORD[lv-1]+' level slot '+(j+1)+(j<av?', available':', spent')+'"></button>';return p}
+function slotTotals(){var a=0,m=0;for(var l=1;l<=9;l++){var mx=slotMax(l);m+=mx;a+=mx-Math.min(mx,N(S.sp.used[l-1]))}return[a,m]}
 function vSpells(){
   var t=S.sp.type,man=t==='manual',auto=t==='auto',rows='',as=auto?autoSlots():null;
   for(var lv=1;lv<=9;lv++){var max=slotMax(lv);if(!max&&!man)continue;
@@ -832,39 +869,48 @@ function vSpells(){
   var lim=S.classes.length?spellLimits():[];
   var limH=lim.length?'<div class="card" style="margin-top:12px"><b>Limits by class</b>'+lim.map(function(x){return '<p class="hint" style="margin:4px 0 0">'+esc(x)+'</p>'}).join('')+'</div>':'';
   var groups='';
-  for(var g=0;g<=9;g++){var idx=[];S.sp.list.forEach(function(s,i){if(N(s.lv)===g)idx.push(i)});if(!idx.length)continue;
-    groups+='<div class="group"><h3><span>'+(g?ORD[g-1]+' level':'Cantrips')+'</span></h3><div class="list">'+idx.map(function(i){var s=S.sp.list[i],has=findSpell(s.n,S.ed);
+  for(var g=0;g<=9;g++){var idx=[];S.sp.list.forEach(function(s,i){if(N(s.lv)===g)idx.push(i)});if(!idx.length&&!(g>0&&slotMax(g)>0))continue;
+    var gOpen=!isOpen('gc'+g);
+    groups+='<div class="group"><div class="gh"><button class="gtog" data-act="opn" data-id="gc'+g+'" aria-expanded="'+gOpen+'"><i class="chev"></i>'+(g?ORD[g-1]+' level':'Cantrips')+'</button>'+(g&&slotMax(g)?'<div class="ghp">'+slotPips(g)+'</div>':'')+'</div>'+(gOpen?(idx.length?'':'<p class="hint" style="margin:8px 0 0">No spells at this level yet.</p>')+'<div class="list">'+idx.map(function(i){var s=S.sp.list[i],has=findSpell(s.n,S.ed);
       if(has)return '<div class="item sp"><div class="line"><button class="who2 grow" data-act="sinfo"'+(s.ap?'':' data-lp="s'+i+'"')+' data-n="'+esc(s.n)+'" aria-label="Details for '+esc(s.n)+'"><b>'+esc(s.n)+'</b><small>'+esc(spellBrief(has))+'</small></button>'
         +(s.ap?'':(g?'<button class="chip '+(N(s.prep)?'on':'')+'" data-act="tog" data-p="sp.list.'+i+'.prep" aria-pressed="'+(!!N(s.prep))+'">Prep</button>':''))+(g?'<button class="btn" data-act="cast" data-lv="'+g+'">Cast</button>':'')+'</div>'
         +'<div class="line tags">'+(s.ap?'<span class="tag ap">Always prepared</span>':'')+spellTags(has).map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join('')+'</div>'+(s.ap?'':delBar('s'+i,'sp.list',i))+'</div>';
       return '<div class="item"><div class="line" data-lp="s'+i+'">'+fld('sp.list.'+i+'.n','Spell',{c:'grow'})+'</div>'+delBar('s'+i,'sp.list',i)+fld('sp.list.'+i+'.note','Notes',{ph:'Range, duration, components...'})
-        +'<div class="line">'+(g?'<button class="chip '+(N(s.prep)?'on':'')+'" data-act="tog" data-p="sp.list.'+i+'.prep" aria-pressed="'+(!!N(s.prep))+'">Prepared</button>':'')+'<button class="chip '+(N(s.conc)?'on':'')+'" data-act="tog" data-p="sp.list.'+i+'.conc" aria-pressed="'+(!!N(s.conc))+'">Concentration</button>'+(g?'<button class="btn" data-act="cast" data-lv="'+g+'" style="margin-left:auto">Cast</button>':'')+'</div></div>'}).join('')+'</div></div>'}
+        +'<div class="line">'+(g?'<button class="chip '+(N(s.prep)?'on':'')+'" data-act="tog" data-p="sp.list.'+i+'.prep" aria-pressed="'+(!!N(s.prep))+'">Prepared</button>':'')+'<button class="chip '+(N(s.conc)?'on':'')+'" data-act="tog" data-p="sp.list.'+i+'.conc" aria-pressed="'+(!!N(s.conc))+'">Concentration</button>'+(g?'<button class="btn" data-act="cast" data-lv="'+g+'" style="margin-left:auto">Cast</button>':'')+'</div></div>'}).join('')+'</div>':'')+'</div>'}
   if(!groups)groups='<p class="empty">No spells yet. Use Browse spells, or pick a level and tap Add spell.</p>';
   var add='<div class="btns" style="margin-bottom:12px"><button class="btn pri" data-act="browse">Browse spells</button></div>';
-  var stats=head.slice(head.indexOf('<div class="stat3"'));
+  var tt=slotTotals(),stats='<div class="stat3"><div><small>Ability</small><b>'+(S.sp.ab?S.sp.ab.toUpperCase():'—')+'</b></div><div><small>Spell attack</small><b data-c="satk"></b></div><div><small>Save DC</small><b data-c="dc"></b></div></div><div class="stat3 two"><div><small>Spell slots</small><b>'+tt[0]+' / '+tt[1]+'</b></div><div><small>Prepared</small><b data-c="prepn"></b></div></div>';
+  var needSec=man||pactN||t==='none';
   return '<div style="margin-top:14px">'+stats+'</div>'
-    +sec('Spell slots','<span class="note">Filled = available</span>',pact+'<div class="list">'+rows+'</div>')
+    +(needSec?sec('Spell slots','<span class="note">Filled = available</span>',pact+'<div class="list">'+rows+'</div>'):'')
     +sec('Spells','',add+'<div id="L-spells">'+groups+'</div>')
     +sec('Caster setup','',(t==='none'?'<p class="hint">Pick a caster type so slots fill in. Choose Automatic if you built the character here.</p>':'')+head.slice(0,head.indexOf('<div class="stat3"'))+limH)}
 
 function vGear(){
   var coins='<div class="grid5">'+['cp','sp','ep','gp','pp'].map(function(c){return fld('coins.'+c,c.toUpperCase(),{t:'num'})}).join('')+'</div>';
   var items=S.items.length?S.items.map(function(t,i){var o=isOpen('i'+i);
-    return '<div class="item"><div class="line" style="flex-wrap:nowrap;align-items:center">'+dot('items.'+i+'.eq',N(t.eq),'Equipped')+'<button class="who2 grow" data-act="opn" data-lp="i'+i+'" data-id="i'+i+'" aria-expanded="'+o+'"><b>'+esc(t.n||'New item')+'</b><small>×'+N(t.q)+(N(t.eq)?' · equipped':'')+'</small></button>'+(t.ref?'<button class="x" data-act="ginfo" data-id="'+t.ref+'">Info</button>':'')+'</div>'+delBar('i'+i,'items',i)
+    return '<div class="item"><div class="line" style="flex-wrap:nowrap;align-items:center">'+dot('items.'+i+'.eq',N(t.eq),'Equipped')+'<button class="who2 grow" data-act="opn" data-lp="i'+i+'" data-id="i'+i+'" aria-expanded="'+o+'"><b>'+esc(t.n||'New item')+'</b><small>×'+N(t.q)+(N(t.eq)?' · equipped':'')+'</small></button>'+'<div class="stepper"><button class="bn" data-act="step" data-p="items.'+i+'.q" data-d="-1" data-min="0" data-max="9999" aria-label="Less '+esc(t.n||'item')+'">−</button><b class="cnt">'+N(t.q)+'</b><button class="bn" data-act="step" data-p="items.'+i+'.q" data-d="1" data-min="0" data-max="9999" aria-label="More '+esc(t.n||'item')+'">+</button></div>'+(t.ref?'<button class="x" data-act="ginfo" data-id="'+t.ref+'">Info</button>':'')+'</div>'+delBar('i'+i,'items',i)
       +(o?'<div class="line">'+fld('items.'+i+'.n','Item',{c:'grow'})+fld('items.'+i+'.q','Qty',{t:'num',c:'s'})+'</div>':'')+'</div>'}).join(''):'<p class="empty">Nothing carried. Tap Browse gear to add items.</p>';
   var load='<div class="stat3"><div><small>Carried</small><b data-c="wt"></b></div><div><small>Capacity (STR × 15)</small><b data-c="cap"></b></div><div><small>Coins</small><b data-c="coinw"></b></div></div><div class="wbar" aria-hidden="true"><i id="wfill"></i></div><div class="note" data-c="enc"></div>';
-  return sec('Coins','',coins+'<p class="hint" style="margin-top:8px">Type your coins here. When you add gear, take the gold out yourself.</p>')
+  return sec('Coins','',coins+'<div class="line" style="margin-top:10px;align-items:flex-end"><label class="fld s"><span>Coin</span><select id="cgc">'+['cp','sp','ep','gp','pp'].map(function(c){return '<option value="'+c+'"'+(c==='gp'?' selected':'')+'>'+c.toUpperCase()+'</option>'}).join('')+'</select></label><label class="fld grow"><span>Amount</span><input id="cga" type="number" inputmode="numeric" min="0" placeholder="0"></label><button class="btn dng" data-act="coin" data-a="-">Lost</button><button class="btn pri" data-act="coin" data-a="+">Got</button></div><p class="hint" style="margin-top:8px">Use Got and Lost to add or spend coins, or type the totals above. When you add gear, take the gold out yourself.</p>')
     +sec('Equipment','<span class="btns"><button class="btn" data-act="gear">Browse gear</button><button class="btn pri" data-act="add" data-k="items">Add</button></span>','<p class="hint">Tap the circle to equip (armor and shield set your AC). Tap a name to edit quantity or weight, hold it to delete.</p><div class="list" id="L-items">'+items+'</div>')}
 
 function ro(l,v){return '<div class="fld"><span>'+l+'</span><div class="rov">'+esc(v)+'</div></div>'}
+function featTag(n){n=String(n||'');var m=n.match(/\(([^)]{2,30})\)\s*$/),q=n.match(/^(Fighting Style|Guild|Weapon Mastery|Optional Rule|Metamagic|Invocation|Maneuver):/i);
+  var t=q?q[1]:(m?m[1]:'');return t?'<span class="tag">'+esc(t)+'</span>':''}
+function profTiles(){var g={},ord=['Armor','Weapons','Tools'];
+  String(S.prof||'').split('\n').forEach(function(l){var m=l.match(/^\s*([A-Za-z][A-Za-z ]{1,24}):\s*(.+?)\.?\s*$/);if(m){var k=m[1].trim();g[k]=(g[k]?g[k]+', ':'')+m[2]}});
+  if((S.langs||[]).length)g.Languages=S.langs.join(', ');
+  var keys=ord.concat(Object.keys(g).filter(function(k){return ord.indexOf(k)<0&&k!=='Languages'&&k.indexOf('gained')<0}),['Languages']);
+  return '<div class="ptl">'+keys.map(function(k){return '<div class="otile pt"><small>'+esc(k)+'</small><b>'+esc(g[k]||'None')+'</b></div>'}).join('')+'</div>'}
 function vStory(){
   var id='<div class="grid2">'+fld('name','Character name',{c:'wide'})+fld('player','Player')+fld('align','Alignment')+(S.classes.length?ro('Class',S.cls)+ro('Subclass',S.sub||'None yet')+ro('Level',lvl()):fld('cls','Class')+fld('sub','Subclass')+fld('level','Level',{t:'num'}))+sel('ed','Rules edition',[['2014','2014 (SRD 5.1)'],['2024','2024 (SRD 5.2.1)']],{c:'wide',r:1})+fld('race','Species / race')+fld('bg','Background')+fld('xp','Experience points',{t:'num'})+'</div><div class="note" data-c="xpn" style="margin-top:6px"></div>';
   var feats=S.feats.length?S.feats.map(function(t,i){var o=isOpen('f'+i),first=clean(t.d||'').replace(/\s+/g,' ').slice(0,70);
-    return '<div class="item"><button class="who2" data-act="opn" data-lp="f'+i+'" data-id="f'+i+'" aria-expanded="'+o+'"><b>'+esc(t.n||'New feature')+'</b>'+(o?'':'<small>'+esc(first)+(t.d&&t.d.length>70?'…':'')+'</small>')+'</button>'
-      +delBar('f'+i,'feats',i)+(o?'<div class="line">'+fld('feats.'+i+'.n','Feature or feat',{c:'grow'})+'</div>'+area('feats.'+i+'.d','Details',6):'')+'</div>'}).join(''):'<p class="empty">No features yet.</p>';
+    return '<div class="item"><button class="who2" data-act="opn" data-lp="f'+i+'" data-id="f'+i+'" aria-expanded="'+o+'"><b>'+esc(t.n||'New feature')+'</b>'+featTag(t.n)+(o?'':'<small>'+esc(first)+(t.d&&t.d.length>70?'…':'')+'</small>')+'</button>'
+      +delBar('f'+i,'feats',i)+(o?'<div class="line">'+fld('feats.'+i+'.n','Feature or feat',{c:'grow'})+'</div>'+area('feats.'+i+'.d','Details (hold to edit)',6,1):'')+'</div>'}).join(''):'<p class="empty">No features yet.</p>';
   return sec('Identity','',id)
-    +sec('Features and traits','<button class="btn pri" data-act="add" data-k="feats">Add</button>','<p class="hint">Tap a feature to read or edit it, hold it to delete.</p><div class="list" id="L-feats">'+feats+'</div>')
-    +sec('Proficiencies and languages','',area('prof','Armor, weapons, tools, languages',4))
+    +sec('Features and traits','<span class="btns"><span class="note">'+S.feats.length+' total</span><button class="btn pri" data-act="add" data-k="feats">Add</button></span>','<p class="hint">Tap a feature to read or edit it, hold it to delete.</p><div class="list" id="L-feats">'+feats+'</div>')
+    +sec('Proficiencies and languages','',profTiles()+'<details class="mini" style="margin-top:12px"><summary>Edit proficiency text</summary>'+area('prof','Armor, weapons, tools, languages',4)+'</details>')
     +sec('Personality','','<div class="grid2">'+area('traits','Personality traits',3)+area('ideals','Ideals',3)+area('bonds','Bonds',3)+area('flaws','Flaws',3)+'</div>')
     +sec('Notes','',area('notes','Backstory, allies, session notes',8))
     +'<p class="hint" style="margin-top:24px">'+ATTR+'</p>'}
@@ -878,7 +924,7 @@ var CALC={
   mod:function(a){return fmt(mod(S.ab[a]))},save:function(a){return fmt(saveB(a))},skill:function(i){return fmt(skillB(+i))},
   prof:function(){return fmt(pb())},init:function(){return fmt(mod(S.ab.dex)+N(S.initMisc))},pass:function(){return 10+skillB(PERC)},
   ac:function(){return calcAC()},dmgt:function(i){return dmgText(+i)},hdrname:function(){return (S.name||'Unnamed')+', Level '+lvl()+((S.race||S.cls)?' '+[S.race,(S.classes.length===1?S.cls.replace(/ \d+$/,''):S.cls)].filter(Boolean).join(' ')+(S.sub?' ('+S.sub+')':''):'')},
-  hdrsub:function(){return ''},
+  hdrsub:function(){return ''},speedt:function(){return N(S.speed)+' ft.'},hdie:function(){var k=Object.keys(S.hdp||{});return k.length?k.map(function(x){return 'd'+x}).join(' '):'d'+N(S.hd.die)},hdtot:function(){var k=Object.keys(S.hdp||{});return k.length?k.reduce(function(a,x){return a+N(S.hdp[x].t)},0):N(S.hd.total)},hdl:function(){var k=Object.keys(S.hdp||{});return k.length?k.reduce(function(a,x){return a+Math.max(0,N(S.hdp[x].t)-N(S.hdp[x].u))},0):Math.max(0,N(S.hd.total)-N(S.hd.used))},size:function(){var n=String(S.race||'').toLowerCase().trim(),l=srd(S.ed).species||[],h=null;l.forEach(function(x){var m=x.name.toLowerCase();if(!h&&(n===m||n.indexOf(m)>=0))h=x});return h&&h.sz?h.sz:'—'},
   hdrhp:function(){return N(S.hp.cur)+'/'+N(S.hp.max)+(N(S.hp.temp)>0?' +'+N(S.hp.temp):'')},
   hpcur:function(){return N(S.hp.cur)},hpmaxt:function(){return '/ '+N(S.hp.max)},hptmp:function(){return N(S.hp.temp)>0?'+'+N(S.hp.temp)+' temp':''},
   atk:function(i){return fmt(atkB(+i))},dc:function(){return 8+pb()+spMod()},satk:function(){return fmt(pb()+spMod())},
@@ -950,7 +996,7 @@ function importOriginal(o){
     if(cd){var sb=cd.subs.filter(function(x){return slug(x.name)===slug(c.sub)})[0];c.classes=[{id:cd.id,lvl:c.level,sub:sb?sb.id:''}]}
     var die=N(String(r.hd||'d8').replace('d',''))||8,cur=N((r.hitDice&&r.hitDice.currentByDie&&r.hitDice.currentByDie[r.hd])!=null?r.hitDice.currentByDie[r.hd]:r.currentHD);
     c.hd={die:die,total:c.level,used:Math.max(0,c.level-(isNaN(cur)?c.level:cur))};
-    var mx=N(r.maxHp&&r.maxHp.base)+N(r.maxHp&&r.maxHp.bonus);c.hp={cur:Math.min(N(r.hp),mx),max:mx,temp:Math.max(0,N(r.hp)-mx)};
+    var mx=N(r.maxHp&&r.maxHp.base)+N(r.maxHp&&r.maxHp.bonus),mxc=N(r.maxHp&&r.maxHp.base)+mod(c.ab.con)*c.level;if(N(r.hp)>mx&&mxc>=N(r.hp))mx=mxc;c.hp={cur:Math.min(N(r.hp),mx),max:mx,temp:Math.max(0,N(r.hp)-mx)};
     c.hpb=0;c.speed=N(r.speed&&r.speed.walk)||30;c.initMisc=N(r.initiative&&r.initiative.base);
     var acv=r.ac||{};c.acm='manual';c.ac=N(acv.value)+(acv.bonusS&&c.ab[acv.bonusS]!=null?mod(c.ab[acv.bonusS]):0)+N(acv.bonus);
     Object.keys(r.save||{}).forEach(function(a){if(r.save[a])c.saves[a]=1});
@@ -973,7 +1019,7 @@ function importOriginal(o){
     if(list.length||tot){c.sp.ab=sps.ability||(cd&&cd.sc?cd.sc.ab:'int');c.sp.type='manual';
       for(i=1;i<=9;i++){var m2=N(r.slots&&r.slots['max'+i]);c.sp.man[i-1]=m2;c.sp.used[i-1]=Math.max(0,m2-N(r.slots&&r.slots[i]))}}
     var ft=[],seen={};function addf(n,d){n=stripTags(n||'');if(!n||seen[n])return;seen[n]=1;ft.push({n:n,d:entText(d).slice(0,1500)})}
-    (r.classFeatures||[]).forEach(function(lvl){(lvl||[]).forEach(function(f){addf(f.name,f.entries)})});
+    (r.classFeatures||[]).forEach(function(lvl,li){if(li+1>c.level)return;(lvl||[]).forEach(function(f){var fl=N(f.level!=null?f.level:f.lvl);if(fl>c.level)return;addf(f.name,f.entries)})});
     (r.raceFeats||[]).forEach(function(f){addf(f.name,f.entries)});(r.feats||[]).forEach(function(f){addf(f.name,f.entries)});
     if(r.bgFeatureTitle)addf(r.bgFeatureTitle,r.bgFeature);
     c.feats=ft;
@@ -1990,7 +2036,8 @@ function act(b){
     case 'add':{var arr0=getp(S,k);arr0.push(DEF[k]());OPEN[S.id+({attacks:'a',items:'i',feats:'f'}[k]||'x')+(arr0.length-1)]=1;touch();render();focusLast('L-'+k);break}
     case 'addspell':{var sl=N($('#newlv').value);S.sp.list.push({n:'',lv:sl,prep:sl>0?1:0,conc:0,note:''});touch();render();
       var ni=document.querySelector('[data-p="sp.list.'+(S.sp.list.length-1)+'.n"]');if(ni)ni.focus();break}
-    case 'del':getp(S,b.dataset.l).splice(+b.dataset.i,1);Object.keys(OPEN).forEach(function(q){if(q.indexOf(S.id)===0)delete OPEN[q]});touch();render();break;
+    case 'del':if(b.dataset.l==='res'){var rr=S.res[+b.dataset.i];if(rr&&rr.k&&!rr.custom){S.rhide=S.rhide||{};S.rhide[rr.k]=1}}getp(S,b.dataset.l).splice(+b.dataset.i,1);Object.keys(OPEN).forEach(function(q){if(q.indexOf(S.id)===0)delete OPEN[q]});touch();render();break;
+    case 'coin':{var cc=$('#cgc').value,ca=Math.max(0,Math.floor(N($('#cga').value)));if(!ca)break;var cv=N(S.coins[cc]),nv=b.dataset.a==='+'?cv+ca:cv-ca;if(nv<0){toastErr('Not enough '+cc.toUpperCase()+' (you have '+cv+')');break}S.coins[cc]=nv;touch();render();show(b.dataset.a==='+'?'Got':'Spent',ca+' '+cc.toUpperCase(),'now '+S.coins[cc]);break}
     case 'hp':{var amt=Math.max(0,Math.floor(N($('#hpamt').value)));if(!amt)break;var h=S.hp;h.cur=N(h.cur);h.max=N(h.max);h.temp=N(h.temp);
       if(a==='dmg'){var r=amt,t=Math.min(h.temp,r);h.temp-=t;r-=t;h.cur=Math.max(0,h.cur-r)}
       else if(a==='heal'){h.cur=Math.min(h.max,h.cur+amt);if(h.cur>0)S.ds={s:0,f:0}}
@@ -2009,6 +2056,7 @@ function act(b){
     case 'htab':HTAB=a;render(false);break;
     case 'hped':PED=a;render(false);break;
     case 'preadd':{var pc=PRESETS().filter(function(x){return x.id===b.dataset.id})[0];if(!pc)break;var nc=fill(blank(),JSON.parse(JSON.stringify(pc.c)));nc.id=uid();DB.chars[nc.id]=nc;DB.active=nc.id;S=nc;HOME=false;TAB='combat';HTAB='mine';touch();render(false);show(nc.name,'Added','Preset copied to your characters','');break}
+    case 'resrestore':S.rhide={};touch();render();break;
     case 'resnew':edOpen('res',-1,{n:'',t:'counter',cur:1,max:1,text:'',rec:{s:0,l:1}});break;
     case 'edres':{var er=S.res[+b.dataset.i];edOpen('res',+b.dataset.i,{n:er.n,t:er.t||'counter',cur:Math.max(0,N(er.max)-N(er.used)),max:N(er.max)||1,text:er.text||'',used:er.used,rec:{s:er.rec&&er.rec.s?1:0,l:er.rec&&er.rec.l?1:0}});break}
     case 'rtog':{var r3=S.res[+b.dataset.i];r3.used=N(r3.used)?0:1;touch();render();break}
@@ -2047,6 +2095,10 @@ var LPK=0,lpT=0,lpX=0,lpY=0,lpEl=null;
 function lpStart(e){var el=e.target.closest&&e.target.closest('[data-lp]');if(!el||e.button>0)return;lpEl=el;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpT);
   lpT=setTimeout(function(){var id=lpEl&&lpEl.dataset.lp;if(!id)return;LPK=1;OPEN[id.indexOf('hm:')===0?'hm:x'+id.slice(3):S.id+'x'+id]=1;if(navigator.vibrate){try{navigator.vibrate(25)}catch(x){}}render();setTimeout(function(){LPK=0},700)},550)}
 function lpStop(){clearTimeout(lpT);lpEl=null}
+var hdT=0;
+document.addEventListener('pointerdown',function(e){var t=e.target;if(!(t&&t.matches&&t.matches('textarea[data-hold][readonly]')))return;clearTimeout(hdT);hdT=setTimeout(function(){t.removeAttribute('readonly');t.focus();if(navigator.vibrate){try{navigator.vibrate(25)}catch(x){}}},500)});
+['pointerup','pointercancel','pointermove'].forEach(function(n){document.addEventListener(n,function(e){if(n==='pointermove'&&e.pointerType==='mouse'&&!e.buttons)return;clearTimeout(hdT)})});
+document.addEventListener('focusout',function(e){var t=e.target;if(t&&t.matches&&t.matches('textarea[data-hold]'))t.setAttribute('readonly','')});
 document.addEventListener('pointerdown',lpStart);
 document.addEventListener('pointerup',lpStop);document.addEventListener('pointercancel',lpStop);
 document.addEventListener('pointermove',function(e){if(lpEl&&(Math.abs(e.clientX-lpX)>8||Math.abs(e.clientY-lpY)>8))lpStop()});
